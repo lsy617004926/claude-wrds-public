@@ -26,6 +26,8 @@ Call these agents using the Task tool when you need domain expertise:
 | `crsp-wrds-expert` | CRSP stock data: returns, prices, identifiers, delisting, distributions |
 | `optionmetrics-wrds-expert` | IvyDB options: prices, greeks, implied volatility, surfaces |
 | `taq-wrds-expert` | TAQ high-frequency: trades, quotes, NBBO (uses SSH/SAS) |
+| `ibes-wrds-expert` | IBES analyst forecasts, consensus, actuals, surprise, recommendations, price targets |
+| `compustat-wrds-expert` | Compustat annual/quarterly fundamentals, book equity, profitability, CCM linking |
 
 ## Database Linking
 
@@ -38,6 +40,7 @@ Call these agents using the Task tool when you need domain expertise:
 | TAQ Monthly | SYMBOL | CUSIP (12-char) | First 9 chars = standard CUSIP, chars 10-12 = exchange ID |
 | TAQ Daily | symbol_root + symbol_suffix | CUSIP (9-char), symbol_15 | symbol_root is the base ticker |
 | Compustat | GVKEY | CUSIP | Use crsp.ccmxpf_lnkhist for GVKEY-PERMNO link |
+| IBES | TICKER | CUSIP (8-char), OFTIC | Use wrdsapps.ibcrsphist for TICKER-PERMNO link (score <= 2) |
 
 ### WRDS Pre-Built Link Tables
 
@@ -56,6 +59,15 @@ WHERE linktype IN ('LC', 'LU')  -- LC=primary, LU=secondary
 SELECT secid, permno, sdate, edate
 FROM wrdsapps.opcrsphist
 WHERE secid = :secid
+```
+
+**IBES-CRSP:**
+```sql
+-- wrdsapps.ibcrsphist: IBES TICKER <-> PERMNO
+SELECT ticker, permno, ncusip, sdate, edate, score
+FROM wrdsapps.ibcrsphist
+WHERE ticker = :ibes_ticker AND score <= 2
+-- score: 1=best (CUSIP+ticker+name), 6=worst. Use score <= 2 for research.
 ```
 
 **TAQ-CRSP (Daily TAQ):**
