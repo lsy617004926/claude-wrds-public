@@ -29,7 +29,7 @@ Call these agents using the Task tool when you need domain expertise:
 | `ibes-wrds-expert` | IBES analyst forecasts, consensus, actuals, surprise, recommendations, price targets |
 | `compustat-wrds-expert` | Compustat annual/quarterly fundamentals, book equity, profitability, CCM linking |
 | `ff-wrds-expert` | Fama-French factor returns (5-factor, momentum, risk-free rate, monthly and daily) |
-| `tr13f-wrds-expert` | Thomson-Reuters/Refinitiv s34 13-F institutional holdings; IOR, breadth, blockholder, RIO signals |
+| `tr13f-wrds-expert` | Thomson-Reuters/Refinitiv s34 13-F institutional holdings |
 
 ## Database Linking
 
