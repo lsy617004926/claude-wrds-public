@@ -516,17 +516,3 @@ JOIN tr_13f.s34type3 t3 USING (mgrno, fdate)
 WHERE t1.mgrname ILIKE '%berkshire%'
   AND t1.rdate >= '2010-01-01';
 ```
-
----
-
-## TODO Before Promoting to Public Repo
-
-1. Schema verified: `tr_13f`.
-2. Tables verified: `s34, s34names, s34type1, s34type2, s34type3, s34type4, s34type6`.
-3. Column lists verified for s34type1, s34type2, s34type3, s34type4, s34type6, s34names.
-4. Coverage verified: `s34type1` 1978-12-31 → 2025-09-30, `s34type6` 2011-03-31 → 2025-09-30 (both still updating).
-5. MFLINKS verified: `mflinks_all.mflink1`, `mflink2`, `mflink3`.
-6. Verified G&M (2001) Table I replication within tolerance.
-7. Numeric replication of a per-stock IOR / NumOwners / DBREADTH panel against an open-source benchmark, for a sample of permnos.
-8. Add the agent to `wrds-query-orchestrator.md` cross-database routing rules (mention 13-F + CRSP joins via NCUSIP-on-MSENAMES).
-9. Test against an `s12` mutual-fund-holdings example to confirm whether to add `s12` coverage in this agent or split into a separate `mfholdings-wrds-expert`.
